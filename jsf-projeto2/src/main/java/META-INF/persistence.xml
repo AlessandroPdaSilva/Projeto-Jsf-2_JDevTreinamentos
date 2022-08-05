@@ -3,7 +3,7 @@
 	
 	<persistence-unit name="jsf-projeto">
 		
-		 
+		<class>model.Pessoa</class>
 		
 		<!-- DADOS BANCO -->
 		<properties>
