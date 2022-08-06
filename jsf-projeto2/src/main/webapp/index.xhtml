@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  
-	  xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
  
  <h:head>
  	<title> Ola mundo</title>
@@ -12,65 +12,86 @@
  <h:body>
  	
  	<h:form>
- 		<h:messages id="msg"/>
+ 	
+ 		<p:breadCrumb>
  		
-	 	<h:panelGrid columns="2">
+ 			<p:menuitem />
+ 			<p:menuitem value="Sair" />
+ 			<p:menuitem value="Relatorio" />
+ 			
+ 		</p:breadCrumb>
+ 		
+ 	</h:form>
+ 	
+ 	<h:form>
+ 	
+ 	
+ 		<p:messages id="msg"/>
+ 		
+	 	<p:panelGrid columns="2">
 	 	
 	 			
 	 		
-	 			<h:outputLabel value="Id:" />
-				<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
+	 			<p:outputLabel value="Id:" />
+				<p:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
 	
-				<h:outputLabel value="Nome:" />
-				<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Preencha o campo nome"/>
+				<p:outputLabel value="Nome:" />
+				<p:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Preencha o campo nome"/>
 	
-				<h:outputLabel value="Sobrenome:" />
-				<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+				<p:outputLabel value="Sobrenome:" />
+				<p:inputText value="#{pessoaBean.pessoa.sobrenome}" />
 				 
-				<h:outputLabel value="Idade:" />
-				<h:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric"/>
+				<p:outputLabel value="Idade:" />
+				<p:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric"/>
+				
+				<h:outputLabel value="Sexo:"/>
+				<p:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" >
+					<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
+					<f:selectItem itemValue="M" itemLabel="Masculino"/>
+					<f:selectItem itemValue="F" itemLabel="Feminino"/>
+				</p:selectOneMenu>
 	 		
-	 			<h:outputLabel value="Login:" />
-				<h:inputText value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Preencha o campo Login" validatorMessage="Minimo de 3 caracteres para login"> 
+	 			<p:outputLabel value="Login:" />
+				<p:inputText value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Preencha o campo Login" validatorMessage="Minimo de 3 caracteres para login"> 
 					<f:validateLength minimum="3"/>
-				</h:inputText>
+				</p:inputText>
 				
-				<h:outputLabel value="Senha:" />
-				<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
+				<p:outputLabel value="Senha:" />
+				<p:password value="#{pessoaBean.pessoa.senha}" />
 				
-	 	</h:panelGrid>
+	 	</p:panelGrid>
 	 	
-	 	<h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
-	 	<h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
+	 	<p:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
+	 	<p:commandButton value="Novo" action="#{pessoaBean.novo}"/>
 	 	
  	</h:form>
  	
  	<h:form id="formTabela">
 	
-		<h:dataTable value="#{pessoaBean.listaPessoa}" var="p" border="3" cellpadding="6">
+		<p:dataTable value="#{pessoaBean.listaPessoa}" var="p" border="3" cellpadding="6">
 		
 			<f:facet name="header">
 				Lista de Pessoas
 			</f:facet>
-			<h:column>
+			<p:column>
 				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{p.id}" />
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">nome</f:facet>
 				<h:outputText value="#{p.nome}" />
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">sobrenome</f:facet>
 				<h:outputText value="#{p.sobrenome}" />
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">idade</f:facet>
 				<h:outputText value="#{p.idade}" />
-			</h:column>
+			</p:column>
 			 
 			
-			<h:column>
+			<p:column>
 				<h:commandLink value="" title="Editar" action="#{pessoaBean.editar}">
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
@@ -78,9 +99,9 @@
 					<h:graphicImage value="resources/img/editar.png"/>
 					
 				</h:commandLink>
-			</h:column>
+			</p:column>
 			
-			<h:column >
+			<p:column >
 				<h:commandLink value="" title="Excluir" action="#{pessoaBean.deletar}" >
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
@@ -88,10 +109,10 @@
 					<h:graphicImage value="resources/img/lixeira.png"/>
 					
 				</h:commandLink>
-			</h:column>
+			</p:column>
 
 
-		</h:dataTable>
+		</p:dataTable>
 		
 	
 		
