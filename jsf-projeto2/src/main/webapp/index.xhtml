@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
+	  
 	  xmlns:h="http://java.sun.com/jsf/html">
  
  <h:head>
@@ -11,7 +12,12 @@
  <h:body>
  	
  	<h:form>
+ 		<h:messages id="msg"/>
+ 		
 	 	<h:panelGrid columns="2">
+	 	
+	 			
+	 		
 	 			<h:outputLabel value="Id:" />
 				<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
 	
@@ -33,7 +39,63 @@
 				<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
 				
 	 	</h:panelGrid>
+	 	
+	 	<h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
+	 	<h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
+	 	
  	</h:form>
+ 	
+ 	<h:form id="formTabela">
+	
+		<h:dataTable value="#{pessoaBean.listaPessoa}" var="p" border="3" cellpadding="6">
+		
+			<f:facet name="header">
+				Lista de Pessoas
+			</f:facet>
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{p.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">nome</f:facet>
+				<h:outputText value="#{p.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">sobrenome</f:facet>
+				<h:outputText value="#{p.sobrenome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">idade</f:facet>
+				<h:outputText value="#{p.idade}" />
+			</h:column>
+			 
+			
+			<h:column>
+				<h:commandLink value="" title="Editar" action="#{pessoaBean.editar}">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pessoaBean.pessoa}" />
+						
+					<h:graphicImage value="resources/img/editar.png"/>
+					
+				</h:commandLink>
+			</h:column>
+			
+			<h:column >
+				<h:commandLink value="" title="Excluir" action="#{pessoaBean.deletar}" >
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pessoaBean.pessoa}" />
+						
+					<h:graphicImage value="resources/img/lixeira.png"/>
+					
+				</h:commandLink>
+			</h:column>
+
+
+		</h:dataTable>
+		
+	
+		
+	</h:form>
  	
  	
  </h:body>
