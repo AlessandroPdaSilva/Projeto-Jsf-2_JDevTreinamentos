@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -194,6 +195,16 @@ public class Pessoa implements Serializable{
 			return false;
 		Pessoa other = (Pessoa) obj;
 		return Objects.equals(id, other.id);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
+				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", cep=" + cep + ", logradouro="
+				+ logradouro + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf + ", ativo=" + ativo
+				+ ", login=" + login + ", senha=" + senha + ", perfil=" + perfil + ", fotoBase64=" + fotoBase64
+				+ ", extensao=" + extensao + ", fotoBase64Original=" + Arrays.toString(fotoBase64Original) + "]";
 	}
 
 

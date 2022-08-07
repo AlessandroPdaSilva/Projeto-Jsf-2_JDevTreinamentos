@@ -15,7 +15,7 @@
  	
  		<p:breadCrumb>
  		
- 			<p:menuitem />
+ 			<p:menuitem action="index"/>
  			<p:menuitem value="Sair" />
  			<p:menuitem value="Relatorio" />
  			
@@ -61,8 +61,8 @@
 				
 	 	</p:panelGrid>
 	 	
-	 	<p:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
-	 	<p:commandButton value="Novo" action="#{pessoaBean.novo}"/>
+	 	<p:commandButton value="Salvar" action="#{pessoaBean.salvar}" ajax="false"/>
+	 	<p:commandButton value="Novo" action="#{pessoaBean.novo}" ajax="false"/>
 	 	
  	</h:form>
  	
@@ -107,6 +107,17 @@
 						target="#{pessoaBean.pessoa}" />
 						
 					<h:graphicImage value="resources/img/lixeira.png"/>
+					
+				</h:commandLink>
+			</p:column>
+			
+		
+			<p:column >
+				<h:commandLink value="" title="Telefone" action="telefone" >
+						
+					 <f:param name="idPessoa" value="#{p.id}"/>
+					 
+					 <h:graphicImage value="resources/img/telefone.png"/>
 					
 				</h:commandLink>
 			</p:column>

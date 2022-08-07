@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+ 
+ <h:head>
+ 	<title> Ola mundo</title>
+ </h:head>
+ 
+ <h:body>
+ 	
+ 	<h:form>
+ 	
+ 		<p:breadCrumb>
+ 		
+ 			<p:menuitem action="index"/>
+ 			<p:menuitem value="Sair" />
+ 			<p:menuitem value="Relatorio" />
+ 			
+ 		</p:breadCrumb>
+ 		
+ 	</h:form>
+ 	
+ 	<h:form>
+ 		
+ 		<h1> Telefones </h1>
+ 		
+ 		<p:messages id="msg"/>
+ 		
+ 		<p:outputLabel value="Usuario:" />
+		<p:inputText value="#{telefoneBean.pessoa.nome}" readonly="true" />
+ 		
+ 		<p:outputLabel value="Id:" />
+		<p:inputText value="#{telefoneBean.telefone.id}" readonly="true" />
+		
+		<p:outputLabel value="Telefone:" />
+		<p:inputMask value="#{telefoneBean.telefone.numero}" mask="(99) 9999-9999"/>
+	 	
+	 	<p:commandButton value="Salvar" action="#{telefoneBean.salvar}" ajax="false"/>
+	 	<p:commandButton value="Novo" action="#{telefoneBean.novo}" ajax="false"/>
+	 	
+ 	
+ 	
+		<p:dataTable value="#{telefoneBean.listaTelefone}" var="t" border="3" cellpadding="6">
+		
+			<f:facet name="header">
+				Lista de Telefones
+			</f:facet>
+			<p:column>
+				<f:facet name="header">Nome da Pessoa</f:facet>
+				<h:outputText value="#{t.pessoa.nome}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{t.id}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">Numero Tel.</f:facet>
+				<h:outputText value="#{t.numero}" />
+			</p:column>
+			
+			
+ 
+			<p:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink value="" title="Editar" action="#{telefoneBean.editar}">
+					<f:setPropertyActionListener value="#{t}"
+						target="#{telefoneBean.telefone}" />
+						
+					<h:graphicImage value="resources/img/editar.png"/>
+					
+				</h:commandLink>
+			</p:column>
+			
+			<p:column >
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandLink value="" title="Excluir" action="#{telefoneBean.deletar}" >
+					<f:setPropertyActionListener value="#{t}"
+						target="#{telefoneBean.telefone}" />
+						
+					<h:graphicImage value="resources/img/lixeira.png"/>
+					
+				</h:commandLink>
+			</p:column>
+			
+	
+
+
+		</p:dataTable>
+ 	
+ 	</h:form>
+ 	
+ 	
+ 	
+ </h:body>
+ 
+</html>
