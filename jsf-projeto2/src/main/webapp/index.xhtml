@@ -26,7 +26,7 @@
  	<h:form>
  	
  	
- 		<p:messages id="msg"/>
+ 		<p:messages id="msg" autoUpdate="true" showDetail="true"/>
  		
 	 	<p:panelGrid columns="2">
 	 	
@@ -36,7 +36,9 @@
 				<p:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
 	
 				<p:outputLabel value="Nome:" />
-				<p:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Preencha o campo nome"/>
+				<p:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Preencha o campo nome" id="nome">
+					<p:watermark value="Informe um nome" for="nome"/>
+				</p:inputText>
 	
 				<p:outputLabel value="Sobrenome:" />
 				<p:inputText value="#{pessoaBean.pessoa.sobrenome}" />

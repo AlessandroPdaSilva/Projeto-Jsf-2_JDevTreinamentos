@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import conexao.HibernateUtil;
+import model.Telefone;
 
 @Named
 public class DaoGenerico<E> implements Serializable{
@@ -132,6 +133,21 @@ public class DaoGenerico<E> implements Serializable{
 		
 		
 		return lista;
+	}
+	
+	// DELETAR
+	public void deletarTelefones(E entidade, Telefone telefone){
+		
+		Object id = hibernateUtil.getPrimaryKey(entidade);
+		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
+		
+		entityManager.createNativeQuery("DELETE FROM "+ telefone.getClass().getSimpleName().toLowerCase()+
+				" WHERE pessoa_id = " + id).executeUpdate();
+		
+		transicao.commit();
+		
 	}
 	
 	

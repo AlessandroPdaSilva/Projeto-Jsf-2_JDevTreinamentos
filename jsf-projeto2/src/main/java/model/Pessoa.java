@@ -1,11 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -40,29 +44,26 @@ public class Pessoa implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date();
 	private String sexo;
-	
 	private String cep;
 	private String logradouro;
 	private String bairro;
 	private String localidade;
 	private String uf;
-	
 	private Boolean ativo;
-	
 	private String login;
 	private String senha;
 	private String perfil;
- 
 	
 	@Column(columnDefinition = "text")
 	private String fotoBase64;
-	
 	private String extensao;
 	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] fotoBase64Original;
 	
+	@OneToMany(mappedBy = "pessoa",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
+	List<Telefone> listaTelefone = new ArrayList<Telefone>();
 	
 	// CONTRUTOR
 	public Pessoa() {
@@ -178,6 +179,13 @@ public class Pessoa implements Serializable{
 	public void setFotoBase64Original(byte[] fotoBase64Original) {
 		this.fotoBase64Original = fotoBase64Original;
 	}
+	public List<Telefone> getListaTelefone() {
+		return listaTelefone;
+	}
+	public void setListaTelefone(List<Telefone> listaTelefone) {
+		this.listaTelefone = listaTelefone;
+	}
+
 
 	@Override
 	public int hashCode() {

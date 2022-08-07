@@ -41,8 +41,7 @@ public class TelefoneBean implements Serializable{
 		Pessoa aux = new Pessoa();
 		pessoa = daoPessoa.pesquisar(Long.parseLong(idPessoa), aux);
 		
-		listaTelefone = daoTelefone.listarTelefones(Telefone.class, pessoa.getId());
-		
+		listar();
 	}
 	
 	public String listar() {
@@ -72,6 +71,7 @@ public class TelefoneBean implements Serializable{
 	public String deletar() {
 		daoTelefone.deletar(telefone);
 		listar();
+		FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Deletado com sucesso!!"));
 		return "";
 	}
 	

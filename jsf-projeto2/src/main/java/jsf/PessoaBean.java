@@ -14,6 +14,7 @@ import javax.inject.Named;
 
 import dao.DaoGenerico;
 import model.Pessoa;
+import model.Telefone;
 
 @ViewScoped
 @Named(value = "pessoaBean")
@@ -48,6 +49,11 @@ public class PessoaBean implements Serializable{
 	
 	//DELETAR
 	public String deletar(){
+		
+		if(pessoa.getListaTelefone() != null) {
+			daoPessoa.deletarTelefones(pessoa, new Telefone());
+		}
+		
 		daoPessoa.deletar(pessoa);
 		novo();
 		lista();
