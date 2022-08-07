@@ -25,10 +25,9 @@
  	
  	<h:form>
  	
- 	
- 		<p:messages id="msg" autoUpdate="true" showDetail="true"/>
+ 		<p:growl id="msg" autoUpdate="true" showDetail="true" />
  		
-	 	<p:panelGrid columns="2">
+	 	<h:panelGrid columns="2">
 	 	
 	 			
 	 		
@@ -46,7 +45,7 @@
 				<p:outputLabel value="Idade:" />
 				<p:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric"/>
 				
-				<h:outputLabel value="Sexo:"/>
+				<p:outputLabel value="Sexo:"/>
 				<p:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" >
 					<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
 					<f:selectItem itemValue="M" itemLabel="Masculino"/>
@@ -61,7 +60,7 @@
 				<p:outputLabel value="Senha:" />
 				<p:password value="#{pessoaBean.pessoa.senha}" />
 				
-	 	</p:panelGrid>
+	 	</h:panelGrid>
 	 	
 	 	<p:commandButton value="Salvar" action="#{pessoaBean.salvar}" ajax="false"/>
 	 	<p:commandButton value="Novo" action="#{pessoaBean.novo}" ajax="false"/>
@@ -104,13 +103,13 @@
 			</p:column>
 			
 			<p:column >
-				<h:commandLink value="" title="Excluir" action="#{pessoaBean.deletar}" >
+				<p:commandLink update=":formTabela:modalDeletar" oncomplete="PF('modalDeletar').show()">
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
-						
+				
 					<h:graphicImage value="resources/img/lixeira.png"/>
-					
-				</h:commandLink>
+				</p:commandLink>
+				
 			</p:column>
 			
 		
@@ -119,15 +118,41 @@
 						
 					 <f:param name="idPessoa" value="#{p.id}"/>
 					 
-					 <h:graphicImage value="resources/img/telefone.png"/>
+					 <h:graphicImage url="resources/img/telefone.png"/>
 					
 				</h:commandLink>
 			</p:column>
 
 
+
+
+
 		</p:dataTable>
 		
-	
+		
+		
+		
+		<p:dialog modal="true" id="modalDeletar" widgetVar="modalDeletar" 
+		position="center" header="Confirmação" width="500px" resizable="false">
+			
+			
+				<h:outputText value="Tem certeza que deseja excluir "/>
+				<h:outputText value="#{pessoaBean.pessoa.nome}"/>
+				<h:outputText value=" ??"/>
+				
+				<br/><br/>
+				
+				<h:commandButton value="Sim, tenho certeza" title="Excluir" action="#{pessoaBean.deletar}" ajax="false" />
+			
+		
+			
+			
+			
+			
+		</p:dialog>
+		
+		
+		
 		
 	</h:form>
  	
