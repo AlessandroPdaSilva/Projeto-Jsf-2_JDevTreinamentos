@@ -1,5 +1,6 @@
 package jsf;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.util.Base64;
 
 import dao.DaoGenerico;
 import model.Pessoa;
@@ -73,6 +76,27 @@ public class PessoaBean implements Serializable{
 		System.out.println("metodo chamado");
 	}
 	
+	public void download() throws Exception{
+		
+		String idPessoa = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("idPessoa");
+		
+		Pessoa p = daoPessoa.pesquisar(Long.parseLong(idPessoa), new Pessoa());
+		
+		byte[] imagem = new Base64().decode(p.getImagem().split("\\,")[1]);
+		
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		
+		response.addHeader("Content-Disposition", "attachment; filename=download.png");
+		response.setContentType("application/octet-stream");
+		response.setContentLength(imagem.length);
+		response.getOutputStream().write(imagem);
+		response.getOutputStream().flush();
+		FacesContext.getCurrentInstance().responseComplete();
+		
+		System.out.println(imagem);
+		
+	}
 	
 	
 	//LISTAR
