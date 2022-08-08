@@ -41,26 +41,14 @@ public class Pessoa implements Serializable{
 	
 	@DecimalMin(value = "18", message = "Idade minima e 18 anos")
 	private int idade;
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento = new Date();
+	
 	private String sexo;
-	private String cep;
-	private String logradouro;
-	private String bairro;
-	private String localidade;
 	private String uf;
-	private Boolean ativo;
 	private String login;
 	private String senha;
-	private String perfil;
 	
 	@Column(columnDefinition = "text")
-	private String fotoBase64;
-	private String extensao;
-	
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	private byte[] fotoBase64Original;
+	private String imagem;
 	
 	@OneToMany(mappedBy = "pessoa",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
 	List<Telefone> listaTelefone = new ArrayList<Telefone>();
@@ -95,24 +83,14 @@ public class Pessoa implements Serializable{
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+
 	public String getSexo() {
 		return sexo;
 	}
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public Boolean getAtivo() {
-		return ativo;
-	}
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
+	
 	public String getLogin() {
 		return login;
 	}
@@ -125,65 +103,25 @@ public class Pessoa implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getPerfil() {
-		return perfil;
-	}
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
-	}
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getLocalidade() {
-		return localidade;
-	}
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
-	}
+	
 	public String getUf() {
 		return uf;
 	}
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public String getFotoBase64() {
-		return fotoBase64;
-	}
-	public void setFotoBase64(String fotoBase64) {
-		this.fotoBase64 = fotoBase64;
-	}
-	public String getExtensao() {
-		return extensao;
-	}
-	public void setExtensao(String extensao) {
-		this.extensao = extensao;
-	}
-	public byte[] getFotoBase64Original() {
-		return fotoBase64Original;
-	}
-	public void setFotoBase64Original(byte[] fotoBase64Original) {
-		this.fotoBase64Original = fotoBase64Original;
-	}
+	
 	public List<Telefone> getListaTelefone() {
 		return listaTelefone;
 	}
 	public void setListaTelefone(List<Telefone> listaTelefone) {
 		this.listaTelefone = listaTelefone;
+	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 
@@ -208,12 +146,13 @@ public class Pessoa implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
-				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", cep=" + cep + ", logradouro="
-				+ logradouro + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf + ", ativo=" + ativo
-				+ ", login=" + login + ", senha=" + senha + ", perfil=" + perfil + ", fotoBase64=" + fotoBase64
-				+ ", extensao=" + extensao + ", fotoBase64Original=" + Arrays.toString(fotoBase64Original) + "]";
+		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade + ", sexo="
+				+ sexo + ", uf=" + uf + ", login=" + login + ", senha=" + senha + ", imagem=" + imagem
+				+ ", listaTelefone=" + listaTelefone + "]";
 	}
+
+
+
 
 
 	 

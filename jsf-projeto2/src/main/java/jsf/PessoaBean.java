@@ -11,6 +11,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.xml.bind.DatatypeConverter;
+
+import org.primefaces.event.FileUploadEvent;
 
 import dao.DaoGenerico;
 import model.Pessoa;
@@ -61,6 +64,16 @@ public class PessoaBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("deletado com sucesso!!"));
 		return "";
 	}
+	
+	public void upload(FileUploadEvent imagem){
+		
+		String imagemBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(imagem.getFile().getContents());
+		pessoa.setImagem(imagemBase64);
+		
+		System.out.println("metodo chamado");
+	}
+	
+	
 	
 	//LISTAR
 	@PostConstruct
