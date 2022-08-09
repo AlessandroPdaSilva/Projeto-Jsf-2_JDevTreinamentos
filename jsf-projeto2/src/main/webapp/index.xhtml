@@ -80,7 +80,9 @@
  	
  	<h:form id="formTabela">
 	
-		<p:dataTable value="#{pessoaBean.listaPessoa}" var="p" border="3" cellpadding="6">
+		<p:dataTable value="#{pessoaBean.listaPessoa}" var="p" border="3" cellpadding="6"
+		rows="5" paginator="true" lazy="true" paginatorPosition="bottom"
+		paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}">
 		
 			<f:facet name="header">
 				Lista de Pessoas
