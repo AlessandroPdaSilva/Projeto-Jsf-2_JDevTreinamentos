@@ -19,7 +19,6 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.util.Base64;
 
 import dao.DaoGenerico;
-import datatablelazy.PessoaTable;
 import model.Pessoa;
 import model.Telefone;
 
@@ -30,7 +29,7 @@ public class PessoaBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Pessoa pessoa = new Pessoa();
-	private PessoaTable<Pessoa> listaPessoa = new PessoaTable<Pessoa>();
+	private List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
 	
 	@Inject
 	private DaoGenerico<Pessoa> daoPessoa;
@@ -103,7 +102,7 @@ public class PessoaBean implements Serializable{
 	//LISTAR
 	@PostConstruct
 	public void lista(){
-		listaPessoa.load(0, 5, null, null);
+		listaPessoa = daoPessoa.listar(Pessoa.class, 10);
 	}
 
 	
@@ -116,11 +115,11 @@ public class PessoaBean implements Serializable{
 		this.pessoa = p;
 	}
 
-	public PessoaTable<Pessoa> getListaPessoa() {
+	public List<Pessoa> getListaPessoa() {
 		return listaPessoa;
 	}
 
-	public void setListaPessoa(PessoaTable<Pessoa> listaPessoa) {
+	public void setListaPessoa(List<Pessoa> listaPessoa) {
 		this.listaPessoa = listaPessoa;
 	}
 
